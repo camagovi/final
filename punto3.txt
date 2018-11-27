@@ -1,1 +1,17 @@
 
+DECLARE
+   v_n digits.n%TYPE;
+   CURSOR digit_cursor IS 
+      SELECT
+          n
+      FROM
+          digits;
+BEGIN
+   OPEN digit_cursor;
+   LOOP
+      FETCH digit_cursor INTO v_n;
+      update digits set pairs = find_digits(v_n) where n = v_n;
+      EXIT WHEN digit_cursor%NOTFOUND;
+   END LOOP;
+   CLOSE digit_cursor;
+END;
