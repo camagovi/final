@@ -1,1 +1,23 @@
 
+
+CREATE TYPE number_array AS VARRAY(100) OF INTEGER;
+
+DECLARE   
+    arreglo VARRAY_TYPE;
+    k integer;
+   
+BEGIN
+   arreglo := VARRAY_TYPE(1,2,3,4,5);
+   k := 5;
+    divisible_sum_pairs(arreglo, k);   
+END;
+
+CREATE OR REPLACE FUNCTION divisible_sum_pairs(arreglo VARRAY_TYPE, k INTEGER) RETURN INTEGER IS
+
+BEGIN
+    FOR i IN 1..arreglo.COUNT LOOP
+        FOR j IN i..i+1 LOOP
+          DBMS_OUTPUT.PUT_LINE(arreglo(i));
+        END LOOP;
+    END LOOP;
+END;
