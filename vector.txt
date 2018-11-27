@@ -1,5 +1,4 @@
 
-
 CREATE TYPE number_array AS VARRAY(100) OF INTEGER;
 
 DECLARE   
@@ -13,11 +12,18 @@ BEGIN
 END;
 
 CREATE OR REPLACE FUNCTION divisible_sum_pairs(arreglo VARRAY_TYPE, k INTEGER) RETURN INTEGER IS
-
+    contador INTEGER :=0;
+    suma INTEGER :=0;
+    division INTEGER :=0;
 BEGIN
     FOR i IN 1..arreglo.COUNT LOOP
         FOR j IN i..i+1 LOOP
-          DBMS_OUTPUT.PUT_LINE(arreglo(i));
+            suma := arreglo(i) + arreglo(j);
+            division := suma mod k;
+            IF division = 0 THEN 
+                contador := contador + 1;
+            END IF;
         END LOOP;
     END LOOP;
+    RETURN contador;
 END;
